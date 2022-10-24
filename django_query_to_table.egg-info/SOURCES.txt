@@ -1,0 +1,8 @@
+LICENSE.txt
+README.md
+setup.py
+django_query_to_table.egg-info/PKG-INFO
+django_query_to_table.egg-info/SOURCES.txt
+django_query_to_table.egg-info/dependency_links.txt
+django_query_to_table.egg-info/requires.txt
+django_query_to_table.egg-info/top_level.txt
