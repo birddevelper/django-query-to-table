@@ -32,6 +32,7 @@ pip install django-query-to-table
 ```python
 from django.db import connection
 from django-query-to-table import DjangoQtt
+from django.http import HttpResponse
 
 # view method
 def listOfPersons(request):
@@ -49,7 +50,8 @@ def listOfPersons(request):
                                   headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
                                   )
   # table is a string variable contianing the html table showing the query result
-  return table
+
+  return HttpResponse(table)
    
  ```
 
