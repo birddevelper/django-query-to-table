@@ -8,7 +8,7 @@ with open('HISTORY.md') as history_file:
 
 setup_args = dict(
     name='django-query-to-table',
-    version='0.1.0',
+    version='0.1.1',
     description='A simple to use Django package to turn your sql query into a beautiful reporting html table',
     long_description_content_type="text/markdown",
     long_description=README + '\n\n' + HISTORY,
