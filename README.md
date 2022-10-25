@@ -45,7 +45,7 @@ def listOfPersons(request):
   headerRowBackgroundColor = '#ffeeee'
   evenRowsBackgroundColor = '#ffeeff'
   oddRowsBackgroundColor = '#ffffff'
-  table = DjangoQtt.generateFromSql(cursor, reportTitle, sqlQuery, columnsToBeSummarized, cssClasses
+  table = DjangoQtt.generateFromSql(cursor, reportTitle, sqlQuery, columnsToBeSummarized, cssClasses,
                                   "ltr", fontName, "Total Salary", True,
                                   headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
                                   )
