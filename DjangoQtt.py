@@ -12,16 +12,13 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
          sumCols=footerCols
          # execute sql query and retrieve data from db
          cursor.execute(sql_query)
-         #result_as_list = result.fetchall()
 
+         # retrieve columns of the data
          desc = cursor.description
 
          result_as_list = [
             dict(zip([col[0] for col in desc ], row)) for row in cursor.fetchall()
-
          ]
-
-         #print(result_as_list)
 
          columns = [col[0] for col in desc ] #result.keys()
          data = result_as_list
@@ -56,7 +53,7 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
                   sumOfColumn[col] = totalText
                   totalColumnSet = True
          
-         # report jinja template to generate data from data retrieved from data base
+         # template to generate data from data retrieved from data base
 
          template= "<center><table dir=\"{{direction}}\"  border=\"1\" class=\"table table-striped {{htmlClass}}\" style=\"width:93%;font-family:'{{font}}'\"> <thead> <tr> <th colspan='{{columns|length|add:'1'}}' style=\"font-family:'{{font}}';font-weight: bold;\"  > {{title}} </th> </tr> <tr style='background-color:{{headerRowColor}}'>{% if rowIndex == True  %} <td align=\"center\"> </td> {% endif %} {% for c in columns %} <th>{{ c }}</th> {% endfor %} </tr> </thead> <tbody> {% for d in data %} <tr style='background-color:{% if forloop.counter0|divisibleby:'2'  %} {{evenRowColor}} {% else %} {{oddRowColor}} {% endif %} '  > {% if rowIndex == True  %}  <td align=\"center\">{{ loop.index }}</td> {% endif %}  {% for attr, value in d.items %} <td align=\"center\">{{ value }}</td> {% endfor %} </tr> {% endfor %} {% if sumOfColumn != None   %} <tr  style='background-color:#eee;font-weight: bold;'> <td></td> {% for a,v in sumOfColumn.items %} <td align=\"center\">{{ v }}</td> {% endfor %} </tr> {% endif %}</tbody> </table></center>"
          
