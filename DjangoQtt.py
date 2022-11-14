@@ -31,14 +31,14 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
          if(sumCols != None) :
            sumOfColumn={}
 
-         if(sumCols != None) :
-            for c in columns :
+           # initiating footer aggrigation values
+           for c in columns :
                if(c in sumCols):
                   sumOfColumn[c]=0
                else:
                   sumOfColumn[c]="-"
 
-         if(sumCols != None) :
+            # travers in rows and aggrigate the values of columns those are in footerCols
             for d in data :
                for attr, value in dict(d).items() :
                   if(attr in sumCols):
@@ -53,11 +53,9 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
                   sumOfColumn[col] = totalText
                   totalColumnSet = True
          
-         # template to generate data from data retrieved from data base
-
+         # template to generate data from data retrieved from database
          template= "<center><table dir=\"{{direction}}\"  border=\"1\" class=\"table table-striped {{htmlClass}}\" style=\"width:93%;font-family:'{{font}}'\"> <thead> <tr> <th colspan='{{columns|length|add:'1'}}' style=\"font-family:'{{font}}';font-weight: bold;\"  > {{title}} </th> </tr> <tr style='background-color:{{headerRowColor}}'>{% if rowIndex == True  %} <td align=\"center\"> </td> {% endif %} {% for c in columns %} <th>{{ c }}</th> {% endfor %} </tr> </thead> <tbody> {% for d in data %} <tr style='background-color:{% if forloop.counter0|divisibleby:'2'  %} {{evenRowColor}} {% else %} {{oddRowColor}} {% endif %} '  > {% if rowIndex == True  %}  <td align=\"center\">{{ loop.index }}</td> {% endif %}  {% for attr, value in d.items %} <td align=\"center\">{{ value }}</td> {% endfor %} </tr> {% endfor %} {% if sumOfColumn != None   %} <tr  style='background-color:#eee;font-weight: bold;'> <td></td> {% for a,v in sumOfColumn.items %} <td align=\"center\">{{ v }}</td> {% endfor %} </tr> {% endif %}</tbody> </table></center>"
          
-         #print(columns)
 
 
          c = Context({
@@ -74,7 +72,7 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
             'oddRowColor': oddRowColor,
             'htmlClass' : htmlClass
          })
-         #return render_template_string(template,title=title,data=data,columns=columns,sumOfColumn=sumOfColumn,direction=direction,font=font,totalText=totalText, rowIndex = rowIndex, headerRowColor =headerRowColor ,evenRowColor = evenRowColor, oddRowColor= oddRowColor )
+
          return Template(template).render(c)
    except BaseException as e :
           print(traceback.format_exc())
