@@ -75,5 +75,6 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
 
          return Template(template).render(c)
    except BaseException as e :
+          #print exception trace to console
           print(traceback.format_exc())
           return ("Error :" + str(e))   
