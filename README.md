@@ -2,7 +2,7 @@
 
 ### django-query-to-table is an easy to use django package to generate reporting html table from sql query.
 
-The package contains single function named "generateFromSql" which accepts 12 arguments :
+The package contains one function named "generateFromSql" accepting 12 arguments :
 
 * cursor : db cursor
 * title : The title of the report that will be shown on top of table
