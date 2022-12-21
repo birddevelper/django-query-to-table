@@ -4,7 +4,7 @@
 
 The package contains one function named "generateFromSql" accepting 12 arguments :
 
-* cursor : db cursor
+* cursor : DB cursor
 * title : The title of the report that will be shown on top of table
 * sqltext : The sql select query to retrieve data
 * footerCols : A list of columns name that you want to have Sum of values on footer . Example : ['amount','price']
@@ -34,7 +34,7 @@ from django.db import connection
 from django-query-to-table import DjangoQtt
 from django.http import HttpResponse
 
-# view method
+# view function in Django project
 def listOfPersons(request):
   cursor = connection.cursor()
   reportTitle = "Employee List"
