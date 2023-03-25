@@ -42,19 +42,19 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
            for d in data :
                for attr, value in dict(d).items() :
                   if(attr in sumCols):
-                     sumOfColumn[attr]=sumOfColumn[attr]+int(str(value).replace(",", ""))
+                     sumOfColumn[attr]=sumOfColumn[attr]+float(str(value).replace(",", ""))
          
          totalColumnSet = False
          if(sumCols != None) :
             for col, val in sumOfColumn.items() :
                if(val!="-") :
-                  sumOfColumn[col] = format(int(str(val)),",")
+                  sumOfColumn[col] = format(float(str(val)),",")
                elif (totalColumnSet == False) :
                   sumOfColumn[col] = totalText
                   totalColumnSet = True
          
          # template to generate data from data retrieved from database
-         template= "<center><table dir=\"{{direction}}\"  border=\"1\" class=\"table table-striped {{htmlClass}}\" style=\"width:93%;font-family:'{{font}}'\"> <thead> <tr> <th colspan='{{columns|length|add:'1'}}' style=\"font-family:'{{font}}';font-weight: bold;\"  > {{title}} </th> </tr> <tr style='background-color:{{headerRowColor}}'>{% if rowIndex == True  %} <td align=\"center\"> </td> {% endif %} {% for c in columns %} <th>{{ c }}</th> {% endfor %} </tr> </thead> <tbody> {% for d in data %} <tr style='background-color:{% if forloop.counter0|divisibleby:'2'  %} {{evenRowColor}} {% else %} {{oddRowColor}} {% endif %} '  > {% if rowIndex == True  %}  <td align=\"center\">{{ loop.index }}</td> {% endif %}  {% for attr, value in d.items %} <td align=\"center\">{{ value }}</td> {% endfor %} </tr> {% endfor %} {% if sumOfColumn != None   %} <tr  style='background-color:#eee;font-weight: bold;'> <td></td> {% for a,v in sumOfColumn.items %} <td align=\"center\">{{ v }}</td> {% endfor %} </tr> {% endif %}</tbody> </table></center>"
+         template= "<center><table dir=\"{{direction}}\"  border=\"1\" class=\"table table-striped {{htmlClass}}\" style=\"width:93%;font-family:'{{font}}'\"> <thead> <tr> <th colspan='{{columns|length|add:'1'}}' style=\"font-family:'{{font}}';font-weight: bold;\"  > {{title}} </th> </tr> <tr style='background-color:{{headerRowColor}}'>{% if rowIndex == True  %} <td align=\"center\"> # </td> {% endif %} {% for c in columns %} <th>{{ c }}</th> {% endfor %} </tr> </thead> <tbody> {% for d in data %} <tr style='background-color:{% if forloop.counter0|divisibleby:'2'  %} {{evenRowColor}} {% else %} {{oddRowColor}} {% endif %} '  > {% if rowIndex == True  %}  <td align=\"center\">{{ forloop.counter }}</td> {% endif %}  {% for attr, value in d.items %} <td align=\"center\">{{ value }}</td> {% endfor %} </tr> {% endfor %} {% if sumOfColumn != None   %} <tr  style='background-color:#eee;font-weight: bold;'> <td></td> {% for a,v in sumOfColumn.items %} <td align=\"center\">{{ v }}</td> {% endfor %} </tr> {% endif %}</tbody> </table></center>"
          
 
 
