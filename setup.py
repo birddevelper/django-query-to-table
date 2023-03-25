@@ -11,6 +11,7 @@ setup_args = dict(
     long_description_content_type="text/markdown",
     long_description=README,
     license='GNU',
+    zip_safe=True,
     packages=find_packages(),
     author='M.Shaeri',
     
