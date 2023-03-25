@@ -31,7 +31,7 @@ pip install django-query-to-table
 
 ```python
 from django.db import connection
-from django-query-to-table import DjangoQtt
+from django_query_to_table import DjangoQtt
 from django.http import HttpResponse
 
 # view function in Django project
