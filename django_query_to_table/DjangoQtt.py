@@ -39,7 +39,7 @@ def generateFromSql(cursor, title, sqltext, footerCols= None, htmlClass="", dire
                   sumOfColumn[c]="-"
 
             # travers in rows and aggrigate the values of columns those are in footerCols
-            for d in data :
+           for d in data :
                for attr, value in dict(d).items() :
                   if(attr in sumCols):
                      sumOfColumn[attr]=sumOfColumn[attr]+int(str(value).replace(",", ""))
