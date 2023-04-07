@@ -1,6 +1,6 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/django-query-to-table?period=total&units=international_system&left_color=black&right_color=green&left_text=Downloads)](https://pepy.tech/project/django-query-to-table)
 
-### django-query-to-table is an easy to use django package to generate html table from sql query.
+### django-query-to-table (DjangoQtt) is an easy to use django package to generate html table from sql query.
 
 You can read more about this package here : [django query to table](https://mshaeri.com/blog/generate-html-table-report-from-sql-query-in-django/)
 
