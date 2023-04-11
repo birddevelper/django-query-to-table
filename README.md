@@ -22,7 +22,7 @@ The package contains one function named "generateFromSql" accepting 12 arguments
 
 
 ## Installation
-To install django-query-to-table using pip :
+Run following command to install DjangoQtt :
 
 ```shell
 pip install django-query-to-table
