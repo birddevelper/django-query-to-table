@@ -2,7 +2,7 @@
 
 ### django-query-to-table (DjangoQtt) is an easy to use django package to generate html table from sql query.
 
-You can read more about this package here : [django query to table](https://mshaeri.com/blog/generate-html-table-report-from-sql-query-in-django/)
+You can read more about this package here : [django query to table package](https://mshaeri.com/blog/generate-html-table-report-from-sql-query-in-django/)
 
 The package contains one function named "generateFromSql" accepting 12 arguments :
 
