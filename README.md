@@ -52,8 +52,8 @@ def listOfPersons(request):
                                   "ltr", fontName, "Total Salary", rowIndexVisibility,
                                   headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
                                   )
-  # table is a string variable contianing the html table showing the query result
-
+  
+  # here the table is a string variable contianing the html table showing the query result
   return HttpResponse(table)
    
  ```
