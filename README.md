@@ -30,7 +30,7 @@ pip install django-query-to-table
 
 ## Usage :
 
-
+- Generate html table by SQL query
 ```python
 from django.db import connection
 from django_query_to_table import DjangoQtt
@@ -38,7 +38,6 @@ from django.http import HttpResponse
 
 # view function in Django project
 def listOfPersons(request):
-  cursor = connection.cursor()
   reportTitle = "Employee List"
   sqlQuery = "SELECT FirstName as 'First Name', LastName as 'Last Name', phone as 'Phone Number', salary as 'Salary' FROM persons"
   columnsToBeSummarized = ['Salary']
@@ -48,7 +47,7 @@ def listOfPersons(request):
   evenRowsBackgroundColor = '#ffeeff'
   oddRowsBackgroundColor = '#ffffff'
   rowIndexVisibility = True
-  table = DjangoQtt.generateFromSql(cursor, reportTitle, sqlQuery, columnsToBeSummarized, cssClasses,
+  table = DjangoQtt.generate_from_sql(reportTitle, sqlQuery, columnsToBeSummarized, cssClasses,
                                   "ltr", fontName, "Total Salary", rowIndexVisibility,
                                   headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
                                   )
