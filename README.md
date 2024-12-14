@@ -4,11 +4,14 @@
 
 You can read more about this package here : [django query to table package](https://mshaeri.com/blog/generate-html-table-report-from-sql-query-in-django/)
 
-The package contains one function named "generateFromSql" accepting 12 arguments :
+The package contains two functions named:
+- **generate_from_sql**: Generate HTML table by given SQL query
+- **generate_from_queryset**:Generate HTML table by given Django queryset
 
-* cursor : DB cursor
+Parameters:
+
 * title : The title of the report that will be shown on top of table
-* sqltext : The sql select query to retrieve data
+* sqltext/queryset : The sql select query to retrieve data / django queryset
 * footerCols : A list of columns name that you want to have Sum of values on footer . Example : ['amount','price']
 * htmlClass : Html CSS classes for the table
 * direction (default = "ltr") : Indicates direction of the report page.  "ltr"- Left to Right , "rtl" -  Right to Left
@@ -28,11 +31,11 @@ Run following command to install DjangoQtt :
 pip install django-query-to-table
 ```
 
-## Usage :
+## Example usage :
 
-- Generate html table by SQL query
+- Generate HTML table by SQL query:
+
 ```python
-from django.db import connection
 from django_query_to_table import DjangoQtt
 from django.http import HttpResponse
 
@@ -52,8 +55,35 @@ def listOfPersons(request):
                                   headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
                                   )
   
-  # here the table is a string variable contianing the html table showing the query result
+  # here the table is a string variable containing the html table showing the query result
   return HttpResponse(table)
    
  ```
 
+- Generate HTML table from querset:
+
+```python
+from django_query_to_table import DjangoQtt
+from django.http import HttpResponse
+from .models import Order
+# view function in Django project
+def listOfPersons(request):
+
+  order_queryset = Order.objects.all().values("customer", "product", "amount")
+  reportTitle = "Order List"
+  columnsToBeSummarized = ['amount']
+  fontName = "Arial"
+  cssClasses = "reportTable container"
+  headerRowBackgroundColor = '#ffeeee'
+  evenRowsBackgroundColor = '#ffeeff'
+  oddRowsBackgroundColor = '#ffffff'
+  rowIndexVisibility = True
+  table = DjangoQtt.generate_from_queryset(reportTitle, order_queryset, columnsToBeSummarized, cssClasses,
+                                  "ltr", fontName, "Total amount", rowIndexVisibility,
+                                  headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
+                                  )
+  
+  # here the table is a string variable containing the html table showing the queryset result
+  return HttpResponse(table)
+   
+ ```
