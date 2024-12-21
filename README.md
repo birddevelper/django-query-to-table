@@ -60,6 +60,8 @@ def listOfPersons(request):
    
  ```
 
+Since Django 4.0.4 introduced a security fix that disallows spaces in aliases, you can use double underscores (__) as a substitute in your aliases. The table generator will automatically display them as spaces in the output. Here's an example:
+
 - Generate HTML table from querset:
 
 ```python
@@ -69,21 +71,35 @@ from .models import Order
 # view function in Django project
 def listOfPersons(request):
 
-  order_queryset = Order.objects.all().values("customer", "product", "amount")
-  reportTitle = "Order List"
-  columnsToBeSummarized = ['amount']
-  fontName = "Arial"
-  cssClasses = "reportTable container"
-  headerRowBackgroundColor = '#ffeeee'
-  evenRowsBackgroundColor = '#ffeeff'
-  oddRowsBackgroundColor = '#ffffff'
-  rowIndexVisibility = True
-  table = DjangoQtt.generate_from_queryset(reportTitle, order_queryset, columnsToBeSummarized, cssClasses,
-                                  "ltr", fontName, "Total amount", rowIndexVisibility,
-                                  headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
-                                  )
+  order_queryset = Order.objects.annotate(
+      **{
+         'Order__Number': F('order_number'),
+         'Order__Item': F('order_item'),
+         'Customer__Name': F('customer_name'),
+         'Order__Date': F('order_date'),
+         'Total__Amount': F('total_amount'),
+      }
+   ).values(
+      'Order__Number',
+      'Order__Item',
+      'Customer__Name',
+      'Order__Date',
+      'Total__Amount'
+   )
+
+  table = DjangoQtt.generate_from_queryset(
+                                       title = "Summmary Table",
+                                       queryset = order_queryset,
+                                       htmlClass = "summary",
+                                       rowIndex = True,
+                                       footerCols=['Total__Amount'],
+
+                                    )
   
-  # here the table is a string variable containing the html table showing the queryset result
   return HttpResponse(table)
    
  ```
+
+ The table will be look like this:
+
+  ![table](docs/django_query_to_table.jpg)

@@ -62,11 +62,13 @@ def _generate_report(cursor, title, sqltext, footerCols, htmlClass, direction, f
    sumOfColumn = None
    if footerCols:
       sumOfColumn = _calculate_sums(data, columns, footerCols, totalText)
+      
+   columns_for_display = list(map(lambda s: s.replace("__", " "), columns))
 
    context = {
       'title': title,
       'data': data,
-      'columns': columns,
+      'columns': columns_for_display,
       'sumOfColumn': sumOfColumn,
       'direction': direction,
       'font': font,
