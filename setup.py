@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='django-query-to-table',
-    version='1.0.0',
+    version='1.1.0',
     description='A simple to use Django package to turn your queryset and sql query into a beautiful reporting html table',
     long_description_content_type="text/markdown",
     long_description=README,
