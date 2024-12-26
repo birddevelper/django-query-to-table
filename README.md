@@ -1,14 +1,14 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/django-query-to-table?period=total&units=international_system&left_color=black&right_color=green&left_text=Downloads)](https://pepy.tech/project/django-query-to-table)
 
-### django-query-to-table (DjangoQtt) is an easy to use django package to generate html table from sql query.
+### django-query-to-table (DjangoQtt) is an easy to use django package to generate html table from django queryset or sql query.
 
 You can read more about this package here : [django query to table package](https://mshaeri.com/blog/generate-html-table-report-from-sql-query-in-django/)
 
-The package contains two functions named:
+The package has two functions, named:
 - **generate_from_sql**: Generate HTML table by given SQL query
 - **generate_from_queryset**:Generate HTML table by given Django queryset
 
-Parameters:
+Parameters and options:
 
 * title : The title of the report that will be shown on top of table
 * sqltext/queryset : The sql select query to retrieve data / django queryset
@@ -60,9 +60,11 @@ def listOfPersons(request):
    
  ```
 
-Since Django 4.0.4 introduced a security fix that disallows spaces in aliases, you can use double underscores (__) as a substitute in your aliases. The table generator will automatically display them as spaces in the output. Here's an example:
-
 - Generate HTML table from querset:
+
+> Since Django 4.0.4 introduced a security fix that disallows spaces in aliases, you can use double underscores (__) as a substitute in your aliases. The table generator will automatically display them as spaces in the output. Here's an example:
+
+
 
 ```python
 from django_query_to_table import DjangoQtt
@@ -103,3 +105,6 @@ def listOfPersons(request):
  The table will be look like this:
 
   ![table](docs/django_query_to_table.jpg)
+
+
+If you find this package useful, please consider giving it a star! ⭐ It helps support the project and lets others discover it.
