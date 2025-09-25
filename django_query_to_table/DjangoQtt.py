@@ -108,9 +108,5 @@ def generateFromSql(cursor, title, sqltext, footerCols=None, htmlClass="", direc
    
 def generate_from_queryset(title, queryset, footerCols=None, htmlClass="", direction="ltr", font="Tahoma", totalText="Total", rowIndex=False, headerRowColor='#eeeeee', evenRowColor='#ffffff', oddRowColor="#ffffff"):
    """Generate the SQL report using a Django QuerySet."""
-   try:
-      sqltext = str(queryset.query)
-      return generate_from_sql(title, sqltext, footerCols, htmlClass, direction, font, totalText, rowIndex, headerRowColor, evenRowColor, oddRowColor)
-   except Exception as e:
-      logger.error(traceback.format_exc())
-      return f"Error: {str(e)}"
+   sqltext = str(queryset.query)
+   return generate_from_sql(title, sqltext, footerCols, htmlClass, direction, font, totalText, rowIndex, headerRowColor, evenRowColor, oddRowColor)
